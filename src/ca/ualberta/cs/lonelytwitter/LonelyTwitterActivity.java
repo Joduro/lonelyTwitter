@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 public class LonelyTwitterActivity extends Activity {
-
+	// static means all objects share this same value. Final means that it cannot be changed
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
@@ -48,7 +48,19 @@ public class LonelyTwitterActivity extends Activity {
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
+		
+		// added
+		User u = new Reader();
+		
+		//ArrayList<User> array = new ArrayList<User>();
+		
+		try {
+			u.setUsername("joe");
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+		
 		super.onStart();
 		String[] tweets = loadFromFile();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
