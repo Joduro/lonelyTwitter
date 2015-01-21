@@ -24,6 +24,10 @@ public class LonelyTwitterActivity extends Activity {
 	private EditText bodyText;
 	private ListView oldTweetsList;
 	
+	//added
+	private ArrayAdapter<String> adapter;
+	//----
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
+				//removed to stop it from closing when hiting save finish();
 
 			}
 		});
@@ -48,22 +52,14 @@ public class LonelyTwitterActivity extends Activity {
 
 	@Override
 	protected void onStart() {
-		
-		// added
-		User u = new Reader();
-		
+
 		//ArrayList<User> array = new ArrayList<User>();
-		
-		try {
-			u.setUsername("joe");
-		} catch (IOException e) {
-			//e.printStackTrace();
-		}
+
 		
 		
 		super.onStart();
 		String[] tweets = loadFromFile();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		adapter = new ArrayAdapter<String>(this,
 				R.layout.list_item, tweets);
 		oldTweetsList.setAdapter(adapter);
 	}
